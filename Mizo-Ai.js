@@ -72,13 +72,17 @@ HBWABotAi.readMessages([m.key])
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
-async function processOpenAiCommand(m, vawk) {
+
+const processOpenAiCommand = async (m, vawk) => {
   try {
-    if (m.sender.startsWith('/sticker') || m.sender.startsWith('/image') || m.sender.startsWith('/ytmp3') || m.sender.startsWith('/ytmp4')) return;
+    if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
+      return;
+    }
     const source = 'auto';
     const target = 'en';
     const athu = `${vawk}`;
-    const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
+    const mizotranslation = await mizo_tawnga_translate_na(source, target, athu);
+
     const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
 *1. Blog:* https://herbert70.blogspot.com and 
 *2. Github:* https://github.com/HBMods-OFC
@@ -87,12 +91,13 @@ async function processOpenAiCommand(m, vawk) {
     const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
     const response1 = await fetch(apiUrl1);
     const responseData1 = await response1.json();
+
     if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
       const message1 = responseData1.message;
       const source1 = 'auto';
       const target1 = 'lus';
       const athu1 = `${message1}`;
-      const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
+      const mizotranslation1 = await mizo_tawnga_translate_na(source1, target1, athu1);
       const me = m.sender;
       await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
@@ -100,9 +105,10 @@ async function processOpenAiCommand(m, vawk) {
     console.error(error);
     dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh\nhttps://wa.me/${global.owner}`);
   }
-}
+};
 
 await processOpenAiCommand(m, `${q}`);
+
 
 
 switch (command) {

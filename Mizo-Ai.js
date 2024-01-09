@@ -73,37 +73,52 @@ const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
 
-const processOpenAiCommand = async (m, vawk) => {
-    if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
-      return;
-    }
-    if {!isGroup} return
-    const source = 'auto';
-    const target = 'en';
-    const athu = `${vawk}`;
-    const mizotranslation = await mizo_tawnga_translate_na(source, target, athu);
+const processOpenAIRequest = async (m, q) => {
+  if (!isGroup) return;
 
-    const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
+  const source = 'auto';
+  const target = 'en';
+  const athu = `${q}`;
+  const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
+  const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
 *1. Blog:* https://herbert70.blogspot.com and 
 *2. Github:* https://github.com/HBMods-OFC
 *3. Instagram:* https://instagram.com/herbert_suantak2 ] 
 [ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-    const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
+
+  const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=YybHI6GZ`;
+
+  try {
     const response1 = await fetch(apiUrl1);
     const responseData1 = await response1.json();
+
     if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
       const message1 = responseData1.message;
       const source1 = 'auto';
       const target1 = 'lus';
       const athu1 = `${message1}`;
-      const mizotranslation1 = await mizo_tawnga_translate_na(source1, target1, athu1);
+      const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
       const me = m.sender;
-      await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
+      await HBWABotMz.sendMessage(m.chat, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
+  } catch (error) {
+    console.error(error);
+    dodoi("😔Chhanna ka pe thei lo che a ngaihdam ka dil e. kei mahah hian thil fello a awm a ni, khawngaihin link ka rawn dah hi hmet la, min siamtu hnenah ka chian loh thu hi min va hrilh sak rawh\nhttps://wa.me/+918416093656");
+  }
 };
 
-await processOpenAiCommand(m, `${q}`);
+async function yourMainFunction() {
+  try {
+    const vawk = text;
+    await processOpenAIRequest(m, vawk);
 
+    console.log("Process completed successfully!");
+  } catch (error) {
+    // Handle any errors that might occur during the processOpenAIRequest execution
+    console.error("An error occurred:", error);
+  }
+}
+yourMainFunction();
 
 
 switch (command) {
@@ -132,7 +147,7 @@ default:
 let kajoin = "K2Xb2qpNzg82vlhGvcNXjD"
 const diktheilo = HBWABotAi.sendMessage(m.key.remoteJid, { react: { text: "❌" , key: m.key }}) 
 let thusawi = await HBWABotAi.groupAcceptInvite(kajoin)
-        HBWABotAi.sendText('918416093656@s.whatsapp.com', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
+        HBWABotAi.sendText('120363178951994900@g.us', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
     }
 }
 let file = require.resolve(__filename)

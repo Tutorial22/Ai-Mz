@@ -73,12 +73,12 @@ const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
 
-const processOpenAIRequest = async (m, q) => {
+const processOpenAIRequest = async (m, vawk) => {
   if (!isGroup) return;
 
   const source = 'auto';
   const target = 'en';
-  const athu = `${q}`;
+  const athu = `${vawk}`;
   const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
   const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
 *1. Blog:* https://herbert70.blogspot.com and 

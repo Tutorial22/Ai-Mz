@@ -80,16 +80,14 @@ async function processOpenAIRequest () {
     }
   const source = 'auto';
   const target = 'en';
-  const athu = `${q}`;
+  const athu = `${text}`;
   const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
   const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
 *1. Blog:* https://herbert70.blogspot.com and 
 *2. Github:* https://github.com/HBMods-OFC
 *3. Instagram:* https://instagram.com/herbert_suantak2 ] 
 [ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-
   const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
-
   try {
     const response1 = await fetch(apiUrl1);
     const responseData1 = await response1.json();
@@ -109,7 +107,7 @@ async function processOpenAIRequest () {
 https://wa.me/${global.owner}`);
   }
 };
-processOpenAIRequest()
+await processOpenAIRequest()
 
 switch (command) {
 case '/ytmp4': case '/ytvideo': {

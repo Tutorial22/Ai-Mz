@@ -125,7 +125,7 @@ HBWABotMz.ev.on("connection.update",async  (s) => {
         	console.log(chalk.magenta(` `))
             console.log(chalk.yellow(`🌿Connected to => ` + JSON.stringify(HBWABotMz.user, null, 2)))
 			await delay(1999)
-            console.log(chalk.yellow(`\n\n${chalk.bold.blue(`[ HBWABot-Mz Ai ]`)}\n\n`))
+            console.log(chalk.yellow(`${chalk.bold.blue(`[ HBWABot-Mz Ai ]`)}`))
             console.log(chalk.cyan(`HBWABot Ai ah ka lo lawm a che`))
         }
         if (
@@ -216,7 +216,8 @@ HBWABotMz.ev.on("connection.update",async  (s) => {
     }
     }
 return startHBWABotMz()
-module.exports = HBWABotMz = async (HBWABotMz, m, msg, chatUpdate, store) => {
+
+module.exports = HBWABotAi = async (HBWABotAi, m, msg, chatUpdate, store) => {
     try {
         const {
 type,
@@ -233,7 +234,7 @@ fromMe
         const args = body.trim().split(/ +/).slice(1)
         const full_args = body.replace(command, '').slice(1).trim()
         const pushname = m.pushName || "No Name"
-        const botNumber = await HBWABotMz.decodeJid(HBWABotMz.user.id)
+        const botNumber = await HBWABotAi.decodeJid(HBWABotAi.user.id)
         const itsMe = m.sender == botNumber ? true : false
         const sender = m.sender
         const text = q = args.join(" ")
@@ -248,9 +249,16 @@ fromMe
         const isAudio = (type == 'audioMessage')
         const isText = (type == 'textMessage')
         const isSticker = (type == 'stickerMessage')
+        if (!HBWABotAi.public) {
+if (!isCreator && !m.key.fromMe) return
+        }
+        if (autoread) {
+HBWABotAi.readMessages([m.key])
+        }
+        HBWABotAi.sendPresenceUpdate('available', from)
 //message reply na
 const dodoi = (teks) => {
- HBWABotMz.sendMessage(from, { text: teks}, { quoted: m})
+ HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
 async function processOpenAiCommand(args, m) {
   try {
@@ -275,20 +283,14 @@ const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizo
       const athu1 = `${message1}`;
       const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
       const me = m.sender;
-      await HBWABotMz.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
+      await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
   } catch (error) {
     console.error(error);
     dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh\nhttps://wa.me/${owner}`);
   }
 }
-if (!HBWABotMz.public) {
-if (!isCreator && !m.key.fromMe) return
-        }
-        if (autoread) {
-HBWABotMz.readMessages([m.key])
-        }
-        HBWABotMz.sendPresenceUpdate('available', from)
+
 switch (command) {
 case '/ytmp4': case '/ytvideo': {
 const herbertvideo = require('./lib/ytdl2')
@@ -303,7 +305,7 @@ const ytc=`
 ┃𒆜│ *Quality:* ${vid.quality}
 ┃𒆜└───────────┈ 
 ╰════════════──┈`
-await HBWABotMz.sendMessage(m.chat,{
+await HBWABotAi.sendMessage(m.chat,{
     video: {url:vid.videoUrl},
     caption: ytc
 },{quoted:m})
@@ -313,9 +315,9 @@ default:
   }
 } catch (err) {
 let kajoin = "K2Xb2qpNzg82vlhGvcNXjD"
-const diktheilo = HBWABotMz.sendMessage(m.key.remoteJid, { react: { text: "❌" , key: m.key }}) 
-let thusawi = await HBWABotMz.groupAcceptInvite(kajoin)
-        HBWABotMz.sendText('120363178951994900@g.us', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
+const diktheilo = HBWABotAi.sendMessage(m.key.remoteJid, { react: { text: "❌" , key: m.key }}) 
+let thusawi = await HBWABotAi.groupAcceptInvite(kajoin)
+        HBWABotAi.sendText('120363178951994900@g.us', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
     }
 }
 let file = require.resolve(__filename)

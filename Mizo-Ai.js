@@ -77,10 +77,7 @@ const processOpenAiCommand = async (m, vawk) => {
     if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
       return;
     }
-    
-    // Assuming isGroup is defined somewhere
-    if (!isGroup) return;
-
+    if {!isGroup} return
     const source = 'auto';
     const target = 'en';
     const athu = `${vawk}`;
@@ -91,12 +88,9 @@ const processOpenAiCommand = async (m, vawk) => {
 *2. Github:* https://github.com/HBMods-OFC
 *3. Instagram:* https://instagram.com/herbert_suantak2 ] 
 [ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-    
     const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
-    
     const response1 = await fetch(apiUrl1);
     const responseData1 = await response1.json();
-    
     if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
       const message1 = responseData1.message;
       const source1 = 'auto';
@@ -104,16 +98,11 @@ const processOpenAiCommand = async (m, vawk) => {
       const athu1 = `${message1}`;
       const mizotranslation1 = await mizo_tawnga_translate_na(source1, target1, athu1);
       const me = m.sender;
-      
-      // Assuming HBWABotAi is a class that needs to be instantiated
-      const botInstance = new HBWABotAi();
-      await botInstance.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
+      await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
 };
 
-// Assuming m and q are defined somewhere
 await processOpenAiCommand(m, `${q}`);
-
 
 
 
@@ -143,7 +132,7 @@ default:
 let kajoin = "K2Xb2qpNzg82vlhGvcNXjD"
 const diktheilo = HBWABotAi.sendMessage(m.key.remoteJid, { react: { text: "❌" , key: m.key }}) 
 let thusawi = await HBWABotAi.groupAcceptInvite(kajoin)
-        HBWABotAi.sendText('120363178951994900@g.us', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
+        HBWABotAi.sendText('918416093656@s.whatsapp.com', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
     }
 }
 let file = require.resolve(__filename)

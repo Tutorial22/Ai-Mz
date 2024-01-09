@@ -74,7 +74,6 @@ const dodoi = (teks) => {
 }
 
 const processOpenAiCommand = async (m, vawk) => {
-  try {
     if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
       return;
     }
@@ -100,10 +99,6 @@ const processOpenAiCommand = async (m, vawk) => {
       const me = m.sender;
       await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
-  } catch (error) {
-    console.error(error);
-    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh\nhttps://wa.me/${owner}`);
-  }
 };
 
 await processOpenAiCommand(m, `${q}`);

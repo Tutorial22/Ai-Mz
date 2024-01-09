@@ -1,5 +1,5 @@
 require('./language')
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, default: HBWABotMzConnect, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, default: HBWABotMzConnect, delay, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const os = require('os');
 const fs = require('fs');
 const fsx = require('fs-extra');
@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif');
 const { exec, spawn, execSync } = require("child_process");
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./lib/uploader');
-const { smsg, getGroupAdmins, formatp, jam, formatDate, getTime, isUrl, await, sleep, clockString, msToDate, sort, toNumber, enumGetKey, runtime, fetchJson, getBuffer, json, delay, format, logic, generateProfilePicture, parseMention, getRandom, pickRandom, reSize } = require('./lib/myfunc');
+const { smsg, getGroupAdmins, formatp, jam, formatDate, getTime, isUrl, await, sleep, clockString, msToDate, sort, toNumber, enumGetKey, runtime, fetchJson, getBuffer, json, format, logic, generateProfilePicture, parseMention, getRandom, pickRandom, reSize } = require('./lib/myfunc');
 const { fetchBuffer, buffergif } = require("./lib/myfunc2");
 const pino = require('pino');
 const { Boom } = require('@hapi/boom');

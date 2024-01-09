@@ -84,6 +84,26 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./session`)
          console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
       }, 3000)
    }
+   
+   HBWABotMz.ev.on('messages.upsert', async chatUpdate => {
+        //console.log(JSON.stringify(chatUpdate, undefined, 2))
+        try {
+            const mek = chatUpdate.messages[0]
+            if (!mek.message) return
+            mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
+            if (mek.key && mek.key.remoteJid === 'status@broadcast'){
+            if (autoread_status) {
+            await HBWABotMz.readMessages([mek.key]) 
+            }
+            } 
+            if (!HBWABotMz.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
+            if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+            const m = smsg(HBWABotMz, mek, store)
+            require("./Mizo-Ai")(HBWABotMz, m, chatUpdate, store)
+        } catch (err) {
+            console.log(err)
+        }
+    })
     HBWABotMz.decodeJid = (jid) => {
         if (!jid) return jid
         if (/:\d+@/gi.test(jid)) {
@@ -216,136 +236,6 @@ HBWABotMz.ev.on("connection.update",async  (s) => {
     }
     }
 return startHBWABotMz()
-
-module.exports = HBWABotAi = async (HBWABotAi, m, msg, chatUpdate, store) => {
-    try {
-        const {
-type,
-quotedMsg,
-mentioned,
-now,
-fromMe
-        } = m
-        var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectdodoi.selectedRowId : (m.mtype == 'templateButtondodoiMessage') ? m.message.templateButtondodoiMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectdodoi.selectedRowId || m.text) : ''
-  var budy = (typeof m.text == 'string' ? m.text : '')
-        var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
-        const isCmd = body.startsWith(prefix)
-        const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
-        const args = body.trim().split(/ +/).slice(1)
-        const full_args = body.replace(command, '').slice(1).trim()
-        const pushname = m.pushName || "No Name"
-        const botNumber = await HBWABotAi.decodeJid(HBWABotAi.user.id)
-        const itsMe = m.sender == botNumber ? true : false
-        const sender = m.sender
-        const text = q = args.join(" ")
-        const from = m.key.remoteJid
-        const fatkuns = (m.quoted || m)
-        const quoted = (fatkuns.mtype == 'buttonsMessage') ? fatkuns[Object.keys(fatkuns)[1]] : (fatkuns.mtype == 'templateMessage') ? fatkuns.hydratedTemplate[Object.keys(fatkuns.hydratedTemplate)[1]] : (fatkuns.mtype == 'product') ? fatkuns[Object.keys(fatkuns)[0]] : m.quoted ? m.quoted : m
-        const mime = (quoted.msg || quoted).mimetype || ''
-        const qmsg = (quoted.msg || quoted)
-        const isMedia = /image|video|sticker|audio/.test(mime)
-        const isImage = (type == 'imageMessage')
-        const isVideo = (type == 'videoMessage')
-        const isAudio = (type == 'audioMessage')
-        const isText = (type == 'textMessage')
-        const isSticker = (type == 'stickerMessage')
-        const isQuotedText = type === 'extendexTextMessage' && content.includes('textMessage')
-        const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
-        const isQuotedLocation = type === 'extendedTextMessage' && content.includes('locationMessage')
-        const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
-        const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-        const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
-        const isQuotedContact = type === 'extendedTextMessage' && content.includes('contactMessage')
-        const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
-        const sticker = []
-        const isAfkOn = afk.checkAfkUser(m.sender, _afk)
-        const isGroup = m.key.remoteJid.endsWith('@g.us')
-        const groupMetadata = m.isGroup ? await HBWABotAi.groupMetadata(m.chat).catch(e => {}) : ''
-        const groupName = m.isGroup ? groupMetadata.subject : ''
-        const participants = m.isGroup ? await groupMetadata.participants : ''
-        const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
-        const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
-        const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
-        const groupOwner = m.isGroup ? groupMetadata.owner : ''
-        const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
-        if (!HBWABotAi.public) {
-if (!isCreator && !m.key.fromMe) return
-        }
-        if (autoread) {
-HBWABotAi.readMessages([m.key])
-        }
-        HBWABotAi.sendPresenceUpdate('available', from)
-//message reply na
-const dodoi = (teks) => {
- HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
-}
-async function processOpenAiCommand(args, m) {
-  try {
-    if (m.sender.startsWith('/sticker') || m.sender.startsWith('/image') || m.sender.startsWith('/ytmp3') || m.sender.startsWith('/ytmp4')) {
-      return  }
-    const source = 'auto';
-    const target = 'en';
-    const athu = `${q}`;
-    const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
-    const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
-*1. Blog:* https://herbert70.blogspot.com and 
-*2. Github:* https://github.com/HBMods-OFC
-*3. Instagram:* https://instagram.com/herbert_suantak2 ] 
-[ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${apis}`;
-    const response1 = await fetch(apiUrl1);
-    const responseData1 = await response1.json();
-    if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
-      const message1 = responseData1.message;
-      const source1 = 'auto';
-      const target1 = 'lus';
-      const athu1 = `${message1}`;
-      const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
-      const me = m.sender;
-      await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
-    } 
-  } catch (error) {
-    console.error(error);
-    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh\nhttps://wa.me/${owner}`);
-  }
-}
-
-switch (command) {
-case '/ytmp4': case '/ytvideo': {
-const herbertvideo = require('./lib/ytdl2')
-if (args.length < 1 || !isUrl(text) || !herbertvideo.isYTUrl(text)) return dodoi(`Video link rawn dah rawh!!\n\n_🤖Kha tiang ringawt loh khan tiang hian type tur_\n*⟨Entirnan :* ${prefix + command} https://youtube.com/watch?v=DA9gCKwaefgs`)
-const vid=await herbertvideo.mp4(text)
-const ytc=`
-╭═══════════┈
-┃𒆜┌───┈
-┃𒆜│ *Tittle:* ${vid.title}
-┃𒆜│ *Date:* ${vid.date}
-┃𒆜│ *Duration:* ${vid.duration}
-┃𒆜│ *Quality:* ${vid.quality}
-┃𒆜└───────────┈ 
-╰════════════──┈`
-await HBWABotAi.sendMessage(m.chat,{
-    video: {url:vid.videoUrl},
-    caption: ytc
-},{quoted:m})
-}
-break
-default:
-  }
-} catch (err) {
-let kajoin = "K2Xb2qpNzg82vlhGvcNXjD"
-const diktheilo = HBWABotAi.sendMessage(m.key.remoteJid, { react: { text: "❌" , key: m.key }}) 
-let thusawi = await HBWABotAi.groupAcceptInvite(kajoin)
-        HBWABotAi.sendText('120363178951994900@g.us', `Hi Herbert, HBWABot-Ai A tangin hei lai hi enfiah ka ngai e...\n\n` + util.format(err), m)
-    }
-}
-let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-    fs.unwatchFile(file)
-    console.log(chalk.redBright(`Update ${__filename}`))
-    delete require.cache[file]
-    require(file)
-})
 process.on('uncaughtException', function (err) {
 let e = String(err)
 if (e.includes("Socket connection timeout")) return

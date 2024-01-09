@@ -74,10 +74,6 @@ const dodoi = (teks) => {
 }
 
 async function processOpenAIRequest () {
-  if (!isGroup) return;
-  if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
-      return;
-    }
   const source = 'auto';
   const target = 'en';
   const athu = `${text}`;

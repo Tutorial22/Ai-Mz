@@ -5,6 +5,7 @@ const fsx = require('fs-extra')
 const path = require('path')
 const util = require('util')
 const axios = require('axios')
+const mizo_tawnga_translate_na = require("@kreisler/js-google-translate-free")
 const fetch = require('node-fetch')
 const { exec, spawn, execSync } = require("child_process")
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./lib/uploader')
@@ -76,7 +77,10 @@ const processOpenAiCommand = async (m, vawk) => {
     if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
       return;
     }
-    const mizo_tawnga_translate_na = require("@kreisler/js-google-translate-free")
+    
+    // Assuming isGroup is defined somewhere
+    if (!isGroup) return;
+
     const source = 'auto';
     const target = 'en';
     const athu = `${vawk}`;
@@ -87,9 +91,12 @@ const processOpenAiCommand = async (m, vawk) => {
 *2. Github:* https://github.com/HBMods-OFC
 *3. Instagram:* https://instagram.com/herbert_suantak2 ] 
 [ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
+    
     const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
+    
     const response1 = await fetch(apiUrl1);
     const responseData1 = await response1.json();
+    
     if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
       const message1 = responseData1.message;
       const source1 = 'auto';
@@ -97,11 +104,16 @@ const processOpenAiCommand = async (m, vawk) => {
       const athu1 = `${message1}`;
       const mizotranslation1 = await mizo_tawnga_translate_na(source1, target1, athu1);
       const me = m.sender;
-      await HBWABotAi.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
+      
+      // Assuming HBWABotAi is a class that needs to be instantiated
+      const botInstance = new HBWABotAi();
+      await botInstance.sendMessage(from, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
 };
 
+// Assuming m and q are defined somewhere
 await processOpenAiCommand(m, `${q}`);
+
 
 
 

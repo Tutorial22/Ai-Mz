@@ -290,7 +290,6 @@ if (!isCreator && !m.key.fromMe) return
 HBWABotMz.readMessages([m.key])
         }
         HBWABotMz.sendPresenceUpdate('available', from)
-}
 switch (command) {
 case '/ytmp4': case '/ytvideo': {
 const herbertvideo = require('./lib/ytdl2')
@@ -312,7 +311,8 @@ await HBWABotMz.sendMessage(m.chat,{
 }
 break
 default:
-    } catch (err) {
+  }
+} catch (err) {
 let kajoin = "K2Xb2qpNzg82vlhGvcNXjD"
 const diktheilo = HBWABotMz.sendMessage(m.key.remoteJid, { react: { text: "❌" , key: m.key }}) 
 let thusawi = await HBWABotMz.groupAcceptInvite(kajoin)

@@ -1,5 +1,5 @@
 require('./language')
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, default: HBWABotMzConnect, delay, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, default: HBWABotMzConnect, PHONENUMBER_MCC, makeCacheableSignalKeyStore, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const os = require('os');
 const fs = require('fs');
 const fsx = require('fs-extra');

@@ -5,7 +5,6 @@ const fs = require('fs');
 const fsx = require('fs-extra');
 const path = require('path');
 const util = require('util');
-const ms = toMs = require('ms');
 const axios = require('axios');
 const fetch = require('node-fetch');
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif');

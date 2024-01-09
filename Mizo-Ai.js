@@ -52,7 +52,6 @@ fromMe
         const isQuotedContact = type === 'extendedTextMessage' && content.includes('contactMessage')
         const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
         const sticker = []
-        const isAfkOn = afk.checkAfkUser(m.sender, _afk)
         const isGroup = m.key.remoteJid.endsWith('@g.us')
         const groupMetadata = m.isGroup ? await HBWABotAi.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''

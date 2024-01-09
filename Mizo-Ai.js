@@ -73,12 +73,14 @@ const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
 
-const processOpenAIRequest = async (m, vawk) => {
+async function processOpenAIRequest () {
   if (!isGroup) return;
-
+  if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
+      return;
+    }
   const source = 'auto';
   const target = 'en';
-  const athu = `${vawk}`;
+  const athu = `${q}`;
   const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
   const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
 *1. Blog:* https://herbert70.blogspot.com and 
@@ -86,7 +88,7 @@ const processOpenAIRequest = async (m, vawk) => {
 *3. Instagram:* https://instagram.com/herbert_suantak2 ] 
 [ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
 
-  const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=YybHI6GZ`;
+  const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
 
   try {
     const response1 = await fetch(apiUrl1);
@@ -103,23 +105,11 @@ const processOpenAIRequest = async (m, vawk) => {
     } 
   } catch (error) {
     console.error(error);
-    dodoi("😔Chhanna ka pe thei lo che a ngaihdam ka dil e. kei mahah hian thil fello a awm a ni, khawngaihin link ka rawn dah hi hmet la, min siamtu hnenah ka chian loh thu hi min va hrilh sak rawh\nhttps://wa.me/+918416093656");
+    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh
+https://wa.me/${global.owner}`);
   }
 };
-
-async function yourMainFunction() {
-  try {
-    const vawk = text;
-    await processOpenAIRequest(m, vawk);
-
-    console.log("Process completed successfully!");
-  } catch (error) {
-    // Handle any errors that might occur during the processOpenAIRequest execution
-    console.error("An error occurred:", error);
-  }
-}
-yourMainFunction();
-
+processOpenAIRequest()
 
 switch (command) {
 case '/ytmp4': case '/ytvideo': {

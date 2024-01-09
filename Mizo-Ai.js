@@ -7,7 +7,6 @@ const util = require('util')
 const axios = require('axios')
 const fetch = require('node-fetch')
 const { exec, spawn, execSync } = require("child_process")
-const mizo_tawnga_translate_na = require("@kreisler/js-google-translate-free")
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, jam, formatDate, getTime, isUrl, await, sleep, clockString, msToDate, sort, toNumber, enumGetKey, runtime, fetchJson, getBuffer, json, delay, format, logic, generateProfilePicture, parseMention, getRandom, pickRandom, reSize } = require('./lib/myfunc')
 const { fetchBuffer, buffergif } = require("./lib/myfunc2")
@@ -77,6 +76,7 @@ const processOpenAiCommand = async (m, vawk) => {
     if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) {
       return;
     }
+    const mizo_tawnga_translate_na = require("@kreisler/js-google-translate-free")
     const source = 'auto';
     const target = 'en';
     const athu = `${vawk}`;
@@ -87,7 +87,7 @@ const processOpenAiCommand = async (m, vawk) => {
 *2. Github:* https://github.com/HBMods-OFC
 *3. Instagram:* https://instagram.com/herbert_suantak2 ] 
 [ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-    const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=YybHI6GZ`;
+    const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
     const response1 = await fetch(apiUrl1);
     const responseData1 = await response1.json();
     if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {

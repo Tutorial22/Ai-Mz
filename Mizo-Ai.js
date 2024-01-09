@@ -72,10 +72,9 @@ HBWABotAi.readMessages([m.key])
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
-async function processOpenAiCommand(args, m) {
+async function processOpenAiCommand(q) {
   try {
-    if (m.sender.startsWith('/sticker') || m.sender.startsWith('/image') || m.sender.startsWith('/ytmp3') || m.sender.startsWith('/ytmp4')) {
-      return  }
+    if (m.sender.startsWith('/sticker') || m.sender.startsWith('/image') || m.sender.startsWith('/ytmp3') || m.sender.startsWith('/ytmp4')) return
     const source = 'auto';
     const target = 'en';
     const athu = `${q}`;
@@ -102,6 +101,7 @@ const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizo
     dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh\nhttps://wa.me/${global.owner}`);
   }
 }
+await processOpenAiCommand(q)
 
 switch (command) {
 case '/ytmp4': case '/ytvideo': {

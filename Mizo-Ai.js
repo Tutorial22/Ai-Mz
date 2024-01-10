@@ -72,7 +72,7 @@ HBWABotAi.readMessages([m.key])
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
-
+/*
 async function processMessage(m) {
   try {
     if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) return;
@@ -108,9 +108,9 @@ async function processMessage(m) {
 
 processMessage(`${text}`);
 
-
+*/
 switch (command) {
-case `${text}i`: {
+case `${text}`: {
 if (!isGroup) return 
 if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) return
  const source = 'auto';
@@ -138,8 +138,7 @@ if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.start
     } 
   } catch (error) {
     console.error(error);
-    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh
-https://wa.me/${global.owner}`);
+    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh\nhttps://wa.me/${global.owner}`);
   }
 }
 break;

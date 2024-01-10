@@ -73,8 +73,12 @@ const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
 
-async function processOpenAIRequest () {
-  const source = 'auto';
+
+switch (command) {
+case '': {
+if (!isGroup) return 
+if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) return
+ const source = 'auto';
   const target = 'en';
   const athu = `${text}`;
   const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
@@ -102,10 +106,8 @@ async function processOpenAIRequest () {
     dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh
 https://wa.me/${global.owner}`);
   }
-};
-await processOpenAIRequest()
-
-switch (command) {
+}
+break;
 case '/ytmp4': case '/ytvideo': {
 const herbertvideo = require('./lib/ytdl2')
 if (args.length < 1 || !isUrl(text) || !herbertvideo.isYTUrl(text)) return dodoi(`Video link rawn dah rawh!!\n\n_🤖Kha tiang ringawt loh khan tiang hian type tur_\n*⟨Entirnan :* ${prefix + command} https://youtube.com/watch?v=DA9gCKwaefgs`)

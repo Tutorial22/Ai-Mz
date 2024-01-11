@@ -98,7 +98,7 @@ if (m.body.startsWith('/sticker') && m.body.startsWith('/ytmp4') && m.body.start
       const athu1 = `${message1}`;
       const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
       const me = m.sender;
-      await HBWABotMz.sendMessage(m.chat, { text: mizotranslation1, mentions: [me] }, { quoted: m });
+      await HBWABotAi.sendMessage(m.chat, { text: mizotranslation1, mentions: [me] }, { quoted: m });
     } 
   } catch (error) {
     console.error(error);
@@ -109,7 +109,7 @@ https://wa.me/${global.owner}`);
 break;
 case 'gb': case 'gbwhatsapp': {
 var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
-HBWABotMz.sendMessage(from, { 
+HBWABotAi.sendMessage(from, { 
 text: ` *GBWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/2022/04/download-gbwhatsapp-last-version-update.html\nDeveloped by HBMods Apk Store`,
 contextInfo:{
 externalAdReply:{
@@ -129,7 +129,7 @@ sourceUrl: `https://herbert70.blogspot.com/2022/04/download-gbwhatsapp-last-vers
 break 
 case 'fm': case 'fmwhatsapp': { 
 var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
-HBWABotMz.sendMessage(from, { 
+HBWABotAi.sendMessage(from, { 
 text: ` *FMWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/search/label/FMWhatsApp\nDeveloped by HBMods Apk Store`,
 contextInfo:{
 externalAdReply:{ 
@@ -149,7 +149,7 @@ sourceUrl: `https://herbert70.blogspot.com/search/label/FMWhatsApp`
 break
 case 'yo': case 'yowhatsapp': {
 var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
-HBWABotMz.sendMessage(from, { 
+HBWABotAi.sendMessage(from, { 
 text: ` *YOWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/2022/10/yowhatsapp.html\nDeveloped by HBMods Apk Store`,
 contextInfo:{
 externalAdReply:{ 
@@ -169,7 +169,7 @@ sourceUrl: `https://herbert70.blogspot.com/2022/10/yowhatsapp.html`
 break
 case 'mb': case 'mbwhatsapp': { 
 var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
-HBWABotMz.sendMessage(from, { 
+HBWABotAi.sendMessage(from, { 
 text: ` *MBWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/search/label/MBWhatsApp?m=1\nDeveloped by HBMods Apk Store`,
 contextInfo:{
 externalAdReply:{

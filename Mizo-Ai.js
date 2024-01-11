@@ -75,6 +75,7 @@ const dodoi = (teks) => {
 
 
 switch (command) {
+/*
 case `${text}`: {
 if (m.body.startsWith('/sticker') && m.body.startsWith('/ytmp4') && m.body.startsWith('/ytmp3') && m.body.startsWith('/image')) return
  const source = 'auto';
@@ -107,6 +108,7 @@ https://wa.me/${global.owner}`);
   }
 }
 break;
+*/
 case 'gb': case 'gbwhatsapp': {
 var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
 HBWABotAi.sendMessage(from, { 

@@ -73,45 +73,10 @@ const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
 
-async function processMessage(m) {
-  try {
-    if (!isGroup) return;
-  const mizo_tawnga_translate_na = require("@kreisler/js-google-translate-free")
-  const source = 'auto';
-  const target = 'en';
-  const athu = `${text}`;
-  const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
-  const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
-*1. Blog:* https://herbert70.blogspot.com and 
-*2. Github:* https://github.com/HBMods-OFC
-*3. Instagram:* https://instagram.com/herbert_suantak2 ] 
-[ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-  const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
-    const response1 = await fetch(apiUrl1);
-    const responseData1 = await response1.json();
-    if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
-      const message1 = responseData1.message;
-      const source1 = 'auto';
-      const target1 = 'lus';
-      const athu1 = `${message1}`;
-      const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
-      const me = m.sender;
-      await HBWABotMz.sendMessage(m.chat, { text: mizotranslation1, mentions: [me] }, { quoted: m });
-    }
-  } catch (error) {
-    console.error(error);
-    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh
-    https://wa.me/${global.owner}`);
-  }
-}
-
-processMessage(`${text}`);
-
 
 switch (command) {
 case `${text}`: {
-if (!isGroup) return 
-if (m.body.startsWith('/sticker') || m.body.startsWith('/ytmp4') || m.body.startsWith('/ytmp3') || m.body.startsWith('/image')) return
+if (m.body.startsWith('/sticker') && m.body.startsWith('/ytmp4') && m.body.startsWith('/ytmp3') && m.body.startsWith('/image')) return
  const source = 'auto';
   const target = 'en';
   const athu = `${text}`;
@@ -142,22 +107,83 @@ https://wa.me/${global.owner}`);
   }
 }
 break;
-case '/ytmp4': case '/ytvideo': {
-const herbertvideo = require('./lib/ytdl2')
-if (args.length < 1 || !isUrl(text) || !herbertvideo.isYTUrl(text)) return dodoi(`Video link rawn dah rawh!!\n\n_🤖Kha tiang ringawt loh khan tiang hian type tur_\n*⟨Entirnan :* ${prefix + command} https://youtube.com/watch?v=DA9gCKwaefgs`)
-const vid=await herbertvideo.mp4(text)
-const ytc=`
-╭═══════════┈
-┃𒆜┌───┈
-┃𒆜│ *Tittle:* ${vid.title}
-┃𒆜│ *Date:* ${vid.date}
-┃𒆜│ *Duration:* ${vid.duration}
-┃𒆜│ *Quality:* ${vid.quality}
-┃𒆜└───────────┈ 
-╰════════════──┈`
-await HBWABotAi.sendMessage(m.chat,{
-    video: {url:vid.videoUrl},
-    caption: ytc
+case 'gb': case 'gbwhatsapp': {
+var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
+HBWABotMz.sendMessage(from, { 
+text: ` *GBWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/2022/04/download-gbwhatsapp-last-version-update.html\nDeveloped by HBMods Apk Store`,
+contextInfo:{
+externalAdReply:{
+showAdAttribution: true,
+containsAutoReply: true, 
+renderLargerThumbnail: false,
+title: 'GBWhatsApp',
+body: 'Latest Version',
+thumbnail: hbmodspng,
+mediaType: 2, 
+mediaUrl: `https://herbert70.blogspot.com/2022/04/download-gbwhatsapp-last-version-update.html`,
+sourceUrl: `https://herbert70.blogspot.com/2022/04/download-gbwhatsapp-last-version-update.html`
+}
+}
+},{quoted:m})
+}
+break 
+case 'fm': case 'fmwhatsapp': { 
+var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
+HBWABotMz.sendMessage(from, { 
+text: ` *FMWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/search/label/FMWhatsApp\nDeveloped by HBMods Apk Store`,
+contextInfo:{
+externalAdReply:{ 
+showAdAttribution: true,
+containsAutoReply: true,
+renderLargerThumbnail: false,
+title: 'FMWhatsApp',
+body: 'Latest Version',
+thumbnail: hbmodspng,
+mediaType: 2,
+mediaUrl: `https://herbert70.blogspot.com/search/label/FMWhatsApp`,
+sourceUrl: `https://herbert70.blogspot.com/search/label/FMWhatsApp`
+}
+}
+},{quoted:m})
+}
+break
+case 'yo': case 'yowhatsapp': {
+var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
+HBWABotMz.sendMessage(from, { 
+text: ` *YOWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/2022/10/yowhatsapp.html\nDeveloped by HBMods Apk Store`,
+contextInfo:{
+externalAdReply:{ 
+showAdAttribution: true,
+containsAutoReply: true,
+renderLargerThumbnail: false, 
+title: 'YOWhatsApp',
+body: 'Latest Version',
+thumbnail: hbmodspng, 
+mediaType: 2,
+mediaUrl: `https://herbert70.blogspot.com/2022/10/yowhatsapp.html`,
+sourceUrl: `https://herbert70.blogspot.com/2022/10/yowhatsapp.html`
+}
+}
+},{quoted:m})
+}
+break
+case 'mb': case 'mbwhatsapp': { 
+var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
+HBWABotMz.sendMessage(from, { 
+text: ` *MBWhatsApp Latest Version*\nhttps://herbert70.blogspot.com/search/label/MBWhatsApp?m=1\nDeveloped by HBMods Apk Store`,
+contextInfo:{
+externalAdReply:{
+showAdAttribution: true,
+containsAutoReply: true,
+renderLargerThumbnail: false, 
+title: 'MBWhatsApp',
+body: 'Latest Version',
+thumbnail: hbmodspng,
+mediaType: 2,
+mediaUrl: `https://herbert70.blogspot.com/search/label/MBWhatsApp?m=1`,
+sourceUrl: `https://herbert70.blogspot.com/search/label/MBWhatsApp?m=1`
+}
+}
 },{quoted:m})
 }
 break

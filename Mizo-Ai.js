@@ -71,11 +71,12 @@ fromMe
         const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
         const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
+        const HerbertTheCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
         if (!HBWABotAi.public) {
-if (!isCreator && !m.key.fromMe) return
+if (!iHerbertTheCreator && !m.key.fromMe) return
         }     
-HBWABotAi.sendPresenceUpdate('unavailable', from)
+HBWABotAi.sendPresenceUpdate('available', from)
 //message reply na
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
@@ -84,7 +85,7 @@ const dodoi = (teks) => {
 
 switch (command) {
 case '#statusaudio':{
-if (!sCreator) return
+if (!HerbertTheCreator) return
 if (/audio/.test(mime)) {
 var StatusAud = await HBWABotAi.downloadAndSaveMediaMessage(quoted)
 await HBWABotAi.sendMessage('status@broadcast', {
@@ -92,7 +93,7 @@ await HBWABotAi.sendMessage('status@broadcast', {
 }
 break
 case '#s': {
-if (!sCreator) return
+if (!HerbertTheCreator) return
 if (!quoted) return
 if (/image/.test(mime)) { 
 let media = await quoted.download()
@@ -107,7 +108,7 @@ let encmedia = await HBWABotMz.sendVideoAsSticker(m.chat, media, m, { packname: 
 }
 break
 case '#dpset':{
-if (!sCreator) return
+if (!HerbertTheCreator) return
 if (!quoted) return 
 if (!/image/.test(mime)) 
 if (/webp/.test(mime)) return 

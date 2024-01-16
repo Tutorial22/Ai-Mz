@@ -88,18 +88,10 @@ if (!sCreator) return
 if (/audio/.test(mime)) {
 var StatusAud = await HBWABotAi.downloadAndSaveMediaMessage(quoted)
 await HBWABotAi.sendMessage('status@broadcast', {
-   audio: {
-url: StatusAud
-   },
-   mimetype: 'audio/mp4',
-   ptt: true
-}, {
-   backgroundColor: '#000000',
-   statusJidList: Object.keys(global.db.users)
-})
+   audio: {url: StatusAud}, mimetype: 'audio/mp4', ptt: true }, {backgroundColor: '#000000', statusJidList: Object.keys(global.db.users)})}
 }
 break
-case '#s': { 
+case '#s': {
 if (!sCreator) return
 if (!quoted) return
 if (/image/.test(mime)) { 

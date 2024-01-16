@@ -75,7 +75,8 @@ fromMe
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
         if (!HBWABotAi.public) {
 if (!HerbertTheCreator && !m.key.fromMe) return
-        }     
+        }
+HBWAbotAi.sendPresenceUpdate('unavailable', from)
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }
@@ -105,7 +106,7 @@ let encmedia = await HBWABotMz.sendVideoAsSticker(m.chat, media, m, { packname: 
 }
 }
 break
-case '#dpset':{
+case '/dpset':{
 if (!HerbertTheCreator) return
 if (!quoted) return 
 if (!/image/.test(mime)) 
@@ -127,8 +128,7 @@ await HBWABotAi.query({
             },
         ],
     });
-    fs.unlinkSync(dptur);
-    let aman = await eco.deduct(limitneihtu, khawlbawm, 50)
+    fs.unlinkSync(dptur)
     dodoi(`Dp chu set fel a ni ta e`);
 }
 break;

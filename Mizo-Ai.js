@@ -11,6 +11,17 @@ const { exec, spawn, execSync } = require("child_process")
 const { TelegraPh, UploadFileUgu, webp2mp4File, floNime } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, jam, formatDate, getTime, isUrl, await, sleep, clockString, msToDate, sort, toNumber, enumGetKey, runtime, fetchJson, getBuffer, json, delay, format, logic, generateProfilePicture, parseMention, getRandom, pickRandom, reSize } = require('./lib/myfunc')
 const { fetchBuffer, buffergif } = require("./lib/myfunc2")
+global.db = JSON.parse(fs.readFileSync('./database.json'))
+if (global.db) global.db = {
+sticker: {},
+database: {}, 
+game: {},
+others: {},
+users: {},
+chats: {},
+settings: {},
+...(global.db || {})
+}
 module.exports = HBWABotAi = async (HBWABotAi, m, msg, chatUpdate, store) => {
     try {
         const {

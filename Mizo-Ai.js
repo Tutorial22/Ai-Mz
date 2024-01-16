@@ -74,9 +74,9 @@ fromMe
         const HerbertTheCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
         if (!HBWABotAi.public) {
-if (!iHerbertTheCreator && !m.key.fromMe) return
+if (!HerbertTheCreator && !m.key.fromMe) return
         }     
-HBWABotAi.sendPresenceUpdate('available', from)
+HBWABotAi.sendPresenceUpdate('unavailable', from)
 //message reply na
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})

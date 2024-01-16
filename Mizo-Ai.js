@@ -75,40 +75,55 @@ const dodoi = (teks) => {
 
 
 switch (command) {
-/*
-case `${text}`: {
-if (m.body.startsWith('/sticker') && m.body.startsWith('/ytmp4') && m.body.startsWith('/ytmp3') && m.body.startsWith('/image')) return
- const source = 'auto';
-  const target = 'en';
-  const athu = `${text}`;
-  const mizotranslation = await mizo_tawnga_translate_na.translate(source, target, athu);
-  const prompt = `[ Hello, I'm HBWABot Assistant, a Whatsapp bot developed by Herbert Suantak also known as Lalngaihawma. My name is HBWABot, crafted by Herbert Suantak with unmatched perfection. If you want to know more about my creator, visit
-*1. Blog:* https://herbert70.blogspot.com and 
-*2. Github:* https://github.com/HBMods-OFC
-*3. Instagram:* https://instagram.com/herbert_suantak2 ] 
-[ I have the ability to make stickers and generate photos. I can download YouTube videos in audio and video formats. You can use /sticker to create stickers, /image to generate images, and /ytmp3 and /ytmp4 to download youtube videos ] `;
-  const apiUrl1 = `https://api.betabotz.eu.org/api/search/openai-logic?text=${mizotranslation}&logic=${encodeURIComponent(prompt)}&apikey=${global.apis}`;
-  try {
-    const response1 = await fetch(apiUrl1);
-    const responseData1 = await response1.json();
-
-    if (response1.status === 200 && responseData1 && responseData1.status === true && responseData1.message) {
-      const message1 = responseData1.message;
-      const source1 = 'auto';
-      const target1 = 'lus';
-      const athu1 = `${message1}`;
-      const mizotranslation1 = await mizo_tawnga_translate_na.translate(source1, target1, athu1);
-      const me = m.sender;
-      await HBWABotAi.sendMessage(m.chat, { text: mizotranslation1, mentions: [me] }, { quoted: m });
-    } 
-  } catch (error) {
-    console.error(error);
-    dodoi(`Ka limit a zoh tawh avangin chhanna ka pe thei lo che a ni, min enkawltu hi khawngaihin va bia la, ka Api's key renew turin va hrilh rawh
-https://wa.me/${global.owner}`);
-  }
+case 'statusaudio':
+case 'upswaudio': {
+  if (!sCreator) return dodoi(mess.owner);
+if (/audio/.test(mime)) {
+var StatusAud = await HBWABotAi.downloadAndSaveMediaMessage(quoted)
+await HBWABotAi.sendMessage('status@broadcast', {
+   audio: {
+url: StatusAud
+   },
+   mimetype: 'audio/mp4',
+   ptt: true
+}, {
+   backgroundColor: '#000000',
+   statusJidList: Object.keys(global.db.users)
+})
+await dodoi(`A in upload zo a✓... i check thei ang`)
+ } else {
+dodoi('Audio reply rawh!')
+ }
+}
+break
+case 'setdpbot2':
+case 'setbotdp2': {
+if (!sCreator) return
+if (!quoted) return dodoi(`Send emaw reply in a caption ah tiang hian rawn dah rawh: ${prefix + command}`)
+if (!/image/.test(mime)) return dodoi(`Send emaw reply in a caption ah tiang hian rawn dah rawh : ${prefix + command}`)
+if (/webp/.test(mime)) return dodoi(`Send emaw reply in a caption sh tiang hian rawn dah rawh : ${prefix + command}`)
+var dptur = await HBWABotAi.downloadAndSaveMediaMessage(quoted, 'ppbot.jpeg');
+const { img } = await generateProfilePicture(dptur);
+await HBWABotAi.query({
+        tag: 'iq',
+        attrs: {
+            to: botNumber,
+            type: 'set',
+            xmlns: 'w:profile:picture',
+        },
+        content: [
+            {
+                tag: 'picture',
+                attrs: { type: 'image' },
+                content: img,
+            },
+        ],
+    });
+    fs.unlinkSync(dptur);
+    let aman = await eco.deduct(limitneihtu, khawlbawm, 50)
+    dodoi(`Dp chu set fel a ni ta e`);
 }
 break;
-*/
 case 'gb': case 'gbwhatsapp': {
 var hbmodspng = await getBuffer(`https://i.imgur.com/XYjDLYn.png`)
 HBWABotAi.sendMessage(from, { 

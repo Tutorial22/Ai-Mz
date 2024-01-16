@@ -76,8 +76,6 @@ fromMe
         if (!HBWABotAi.public) {
 if (!HerbertTheCreator && !m.key.fromMe) return
         }     
-HBWABotAi.sendPresenceUpdate('unavailable', from)
-//message reply na
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
 }

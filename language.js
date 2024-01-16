@@ -1,6 +1,6 @@
 const fs = require('fs')
 const chalk = require('chalk')
-global.autoread = true
+global.autoread = false
 global.mizolanguage = true //if you put false the bot can talk to English language 
 global.apis = "YybHI6GZ"
 global.prefa = ['','!','.','#','&']

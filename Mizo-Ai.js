@@ -63,12 +63,8 @@ fromMe
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
         if (!HBWABotAi.public) {
 if (!isCreator && !m.key.fromMe) return
-        }
-       await HBWABotAi.public = false
-        if (autoread) {
-HBWABotAi.readMessages([m.key])
-        }
-        HBWABotAi.sendPresenceUpdate('available', from)
+        }     
+HBWABotAi.sendPresenceUpdate('unavailable', from)
 //message reply na
 const dodoi = (teks) => {
  HBWABotAi.sendMessage(from, { text: teks}, { quoted: m})
@@ -76,8 +72,7 @@ const dodoi = (teks) => {
 
 
 switch (command) {
-case 'statusaudio':
-case 'upswaudio': {
+case '#statusaudio':{
 if (!sCreator) return
 if (/audio/.test(mime)) {
 var StatusAud = await HBWABotAi.downloadAndSaveMediaMessage(quoted)
@@ -93,7 +88,8 @@ url: StatusAud
 })
 }
 break
-case 's': { 
+case '#s': { 
+if (!sCreator) return
 if (!quoted) return
 if (/image/.test(mime)) { 
 let media = await quoted.download()
@@ -107,7 +103,7 @@ let encmedia = await HBWABotMz.sendVideoAsSticker(m.chat, media, m, { packname: 
 }
 }
 break
-case 'dpset':{
+case '#dpset':{
 if (!sCreator) return
 if (!quoted) return 
 if (!/image/.test(mime)) 

@@ -84,7 +84,7 @@ const dodoi = (teks) => {
 
 
 switch (command) {
-case '#statusaudio':{
+    case '/status':{
 if (!HerbertTheCreator) return
 if (/audio/.test(mime)) {
 var StatusAud = await HBWABotAi.downloadAndSaveMediaMessage(quoted)
@@ -92,7 +92,7 @@ await HBWABotAi.sendMessage('status@broadcast', {
    audio: {url: StatusAud}, mimetype: 'audio/mp4', ptt: true }, {backgroundColor: '#000000', statusJidList: Object.keys(global.db.users)})}
 }
 break
-case '#s': {
+case '/st': {
 if (!HerbertTheCreator) return
 if (!quoted) return
 if (/image/.test(mime)) { 

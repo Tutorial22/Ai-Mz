@@ -64,6 +64,7 @@ fromMe
         if (!HBWABotAi.public) {
 if (!isCreator && !m.key.fromMe) return
         }
+       await HBWABotAi.public = false
         if (autoread) {
 HBWABotAi.readMessages([m.key])
         }
@@ -77,7 +78,7 @@ const dodoi = (teks) => {
 switch (command) {
 case 'statusaudio':
 case 'upswaudio': {
-  if (!sCreator) return dodoi(mess.owner);
+if (!sCreator) return
 if (/audio/.test(mime)) {
 var StatusAud = await HBWABotAi.downloadAndSaveMediaMessage(quoted)
 await HBWABotAi.sendMessage('status@broadcast', {
@@ -90,18 +91,27 @@ url: StatusAud
    backgroundColor: '#000000',
    statusJidList: Object.keys(global.db.users)
 })
-await dodoi(`A in upload zo a✓... i check thei ang`)
- } else {
-dodoi('Audio reply rawh!')
- }
 }
 break
-case 'setdpbot2':
-case 'setbotdp2': {
+case 's': { 
+if (!quoted) return
+if (/image/.test(mime)) { 
+let media = await quoted.download()
+let encmedia = await HBWABotMz.sendImageAsSticker(m.chat, media, m, { packname: 'Siamted by' , author: 'Bot'})
+
+} else if (/video/.test(mime)) {
+if ((quoted.msg || quoted).seconds > 11) return
+let media = await quoted.download()
+let encmedia = await HBWABotMz.sendVideoAsSticker(m.chat, media, m, { packname: 'Siamted by' , author: 'Bot'})
+
+}
+}
+break
+case 'dpset':{
 if (!sCreator) return
-if (!quoted) return dodoi(`Send emaw reply in a caption ah tiang hian rawn dah rawh: ${prefix + command}`)
-if (!/image/.test(mime)) return dodoi(`Send emaw reply in a caption ah tiang hian rawn dah rawh : ${prefix + command}`)
-if (/webp/.test(mime)) return dodoi(`Send emaw reply in a caption sh tiang hian rawn dah rawh : ${prefix + command}`)
+if (!quoted) return 
+if (!/image/.test(mime)) 
+if (/webp/.test(mime)) return 
 var dptur = await HBWABotAi.downloadAndSaveMediaMessage(quoted, 'ppbot.jpeg');
 const { img } = await generateProfilePicture(dptur);
 await HBWABotAi.query({
